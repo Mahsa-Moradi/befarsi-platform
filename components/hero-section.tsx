@@ -196,7 +196,7 @@ export default function HeroSection() {
       {/* Background layer - Testimonial Rows */}
       <div className="absolute inset-0 z-10 overflow-hidden">
         {/* First row of testimonials */}
-        <div className={`flex py-4 animate-marquee-right ${isHovered ? "animate-paused" : ""}`}>
+        <div className={`flex py-4 container mx-auto px-4 animate-marquee-right ${isHovered ? "animate-paused" : ""}`}>
           {doubledTestimonials.map((testimonial, index) => (
             <TestimonialCard
               key={`row1-${testimonial.id}-${index}`}
@@ -209,7 +209,7 @@ export default function HeroSection() {
         </div>
 
         {/* Second row of testimonials */}
-        <div className={`flex py-4 animate-marquee-right ${isHovered ? "animate-paused" : ""}`}>
+        <div className={`flex  container mx-auto px-4 animate-marquee-right ${isHovered ? "animate-paused" : ""}`}>
           {doubledTestimonials.reverse().map((testimonial, index) => (
             <TestimonialCard
               key={`row2-${testimonial.id}-${index}`}

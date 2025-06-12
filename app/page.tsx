@@ -260,16 +260,259 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ticker/Marquee at bottom */}
-      <div className="fixed bottom-0 left-0 right-0 bg-indigo-900/50 backdrop-blur-sm py-3 overflow-hidden z-40">
-        <div className="animate-marquee whitespace-nowrap">
-          <span className="mx-4 text-gray-200">
-            Find Trusted Professionals in Belgium • Connect with Verified Service Providers •
-          </span>
-          <span className="mx-4 text-gray-200">BeFarsi: Your Gateway to Professional Services Since 2024 •</span>
-          <span className="mx-4 text-gray-200">Quality Services, Transparent Pricing, Genuine Reviews •</span>
+      {/* Comprehensive Footer */}
+      <footer className="bg-gray-50 dark:bg-gray-900 border-t border-gray-200 dark:border-gray-800">
+        <div className="container mx-auto px-4 py-12">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-8">
+            {/* Logo and Country Selector */}
+            <div className="lg:col-span-1">
+              <div className="flex items-center gap-2 mb-6">
+                <img src="/placeholder.svg?height=32&width=32" alt="BeFarsi Logo" className="w-8 h-8" />
+                <span className="font-bold text-xl text-gray-900 dark:text-white">BeFarsi</span>
+              </div>
+
+              {/* Country Selector */}
+              <div className="mb-6">
+                <select className="bg-white dark:bg-gray-800 border border-gray-300 dark:border-gray-600 rounded-md px-3 py-2 text-sm text-gray-900 dark:text-white">
+                  <option value="be">🇧🇪 Belgium</option>
+                  <option value="nl">🇳🇱 Netherlands</option>
+                  <option value="fr">🇫🇷 France</option>
+                </select>
+              </div>
+
+              <p className="text-sm text-gray-600 dark:text-gray-400">© 2025 BeFarsi Inc.</p>
+            </div>
+
+            {/* Company */}
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">COMPANY</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/about" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    About BeFarsi
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/careers" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Careers
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/privacy" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Privacy & Notice
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/terms" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Terms
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/cookies" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Cookie Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/mobile" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Mobile Apps
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/copyright" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Copyright & Trademark
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Business Services */}
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">BUSINESS SERVICES</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/professionals" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    For Professionals
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pro-vs-basic" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    BeFarsi vs. BeFarsi Pro
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/pro-features" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    BeFarsi Pro Features
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/advertising" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    BeFarsi Pro Advertising
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/business-tools" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Business Management Tools
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/brands" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    For Brands
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/trade-program" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Trade Program
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/marketing-tools" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Marketing Tools
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Get Help */}
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">GET HELP</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link href="/orders" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Your Orders
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/booking" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Booking & Scheduling
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/payment" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Payment Policy
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/belgium" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    BeFarsi Belgium
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/reviews" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Review Professionals
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/suggestions" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Suggested Professionals
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/accessibility" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Accessibility
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/support" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    BeFarsi Support
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/contact" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Contact
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/signin" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                    Sign In
+                  </Link>
+                </li>
+              </ul>
+            </div>
+
+            {/* Connect With Us */}
+            <div>
+              <h3 className="font-semibold text-gray-900 dark:text-white mb-4">CONNECT WITH US</h3>
+              <ul className="space-y-3">
+                <li>
+                  <Link
+                    href="/blog"
+                    className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500"
+                  >
+                    <div className="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                      <span className="text-xs">📝</span>
+                    </div>
+                    BeFarsi Blog
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://twitter.com/befarsi"
+                    className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500"
+                  >
+                    <div className="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                      <span className="text-xs">🐦</span>
+                    </div>
+                    Twitter
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://facebook.com/befarsi"
+                    className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500"
+                  >
+                    <div className="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                      <span className="text-xs">📘</span>
+                    </div>
+                    Facebook
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="https://youtube.com/befarsi"
+                    className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500"
+                  >
+                    <div className="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                      <span className="text-xs">📺</span>
+                    </div>
+                    YouTube
+                  </Link>
+                </li>
+                <li>
+                  <Link
+                    href="/rss"
+                    className="flex items-center gap-2 text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500"
+                  >
+                    <div className="w-5 h-5 bg-gray-300 dark:bg-gray-600 rounded-full flex items-center justify-center">
+                      <span className="text-xs">📡</span>
+                    </div>
+                    RSS
+                  </Link>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          {/* Bottom Border */}
+          <div className="border-t border-gray-200 dark:border-gray-700 mt-12 pt-8">
+            <div className="flex flex-col md:flex-row justify-between items-center">
+              <p className="text-sm text-gray-600 dark:text-gray-400 mb-4 md:mb-0">
+                Find Trusted Professionals in Belgium • Connect with Verified Service Providers
+              </p>
+              <div className="flex items-center gap-4">
+                <Link href="/terms" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                  Terms
+                </Link>
+                <Link href="/privacy" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                  Privacy
+                </Link>
+                <Link href="/cookies" className="text-sm text-gray-600 dark:text-gray-400 hover:text-sky-500">
+                  Cookies
+                </Link>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
+      </footer>
 
       {/* WhatsApp button */}
       <Link

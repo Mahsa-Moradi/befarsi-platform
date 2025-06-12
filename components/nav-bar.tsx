@@ -8,7 +8,8 @@ import { DropdownMenu, DropdownMenuContent, DropdownMenuItem, DropdownMenuTrigge
 import { ChevronDown } from "lucide-react"
 import { usePathname } from "next/navigation"
 import { ThemeToggle } from "@/components/theme-toggle"
-import { MegaMenu } from "@/components/mega-menu"
+import LoginModal from "@/components/login-modal"
+import SignupModal from "@/components/signup-modal"
 
 const services = [
   {
@@ -51,6 +52,21 @@ const services = [
 export default function NavBar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [megaMenuOpen, setMegaMenuOpen] = useState(false)
+  const [loginModalOpen, setLoginModalOpen] = useState(false)
+  const [signupModalOpen, setSignupModalOpen] = useState(false)
+  const [selectedLanguage, setSelectedLanguage] = useState({
+    code: "en",
+    flag: "🇬🇧",
+    name: "English",
+  })
+
+  const languages = [
+    { code: "fa", flag: "🇮🇷", name: "فارسی" },
+    { code: "en", flag: "🇬🇧", name: "English" },
+    { code: "nl", flag: "🇳🇱", name: "Nederlands" },
+    { code: "fr", flag: "🇫🇷", name: "Français" },
+    { code: "de", flag: "🇩🇪", name: "Deutsch" },
+  ]
   const pathname = usePathname()
   const servicesBtnRef = useRef<HTMLButtonElement>(null)
 
@@ -72,7 +88,17 @@ export default function NavBar() {
   // Helper to check if a nav item is active
   const isActive = (href: string) => {
     if (href === "/" && pathname === "/") return true
-    return pathname === href
+    return pathname === href || pathname.startsWith(href)
+  }
+
+  const handleSwitchToLogin = () => {
+    setSignupModalOpen(false)
+    setLoginModalOpen(true)
+  }
+
+  // Handle services navigation - go to services page instead of opening mega menu
+  const handleServicesClick = () => {
+    window.location.href = "/services"
   }
 
   return (
@@ -156,19 +182,15 @@ export default function NavBar() {
               Find Professionals
             </Link>
 
-            {/* Services with MegaMenu */}
-            <div className="relative">
-              <button
-                ref={servicesBtnRef}
-                onClick={() => setMegaMenuOpen(!megaMenuOpen)}
-                className={`text-gray-900 dark:text-white hover:text-sky-300 neon-underline hover:bg-accent px-4 py-2 rounded transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 flex items-center gap-1${
-                  pathname.startsWith("/services") ? " active" : ""
-                }`}
-              >
-                Services <ChevronDown className="ml-2 h-4 w-4" />
-              </button>
-              <MegaMenu open={megaMenuOpen} onClose={() => setMegaMenuOpen(false)} />
-            </div>
+            {/* Services - now navigates to services page */}
+            <Link
+              href="/services"
+              className={`text-gray-900 dark:text-white hover:text-sky-300 neon-underline hover:bg-accent px-4 py-2 rounded transition-colors duration-200 focus:outline-none focus-visible:ring-2 focus-visible:ring-sky-400 flex items-center gap-1${
+                pathname.startsWith("/services") ? " active" : ""
+              }`}
+            >
+              Services
+            </Link>
 
             <Link
               href="/about"
@@ -208,32 +230,13 @@ export default function NavBar() {
                   Find Professionals
                 </Link>
 
-                {/* Mobile Services Dropdown */}
-                <div className="py-2">
-                  <div className="text-gray-900 dark:text-white font-medium mb-2">Services</div>
-                  <div className="pl-4 space-y-2">
-                    {services.map((service) => (
-                      <div key={service.category} className="space-y-1">
-                        <div className="text-sky-300">
-                          <span className="mr-2">{service.icon}</span>
-                          {service.category}
-                        </div>
-                        <div className="pl-6 space-y-1">
-                          {service.items.map((item) => (
-                            <Link
-                              key={item}
-                              href={`/services/${item.toLowerCase().replace(/\s+/g, "-")}`}
-                              className="block py-1 text-gray-700 dark:text-white/80 hover:text-sky-300"
-                              onClick={() => setIsMobileMenuOpen(false)}
-                            >
-                              {item}
-                            </Link>
-                          ))}
-                        </div>
-                      </div>
-                    ))}
-                  </div>
-                </div>
+                <Link
+                  href="/services"
+                  className="text-lg text-gray-900 dark:text-white relative group"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Services
+                </Link>
 
                 <Link
                   href="/about"
@@ -255,35 +258,63 @@ export default function NavBar() {
 
           <div className="flex items-center space-x-4">
             <ThemeToggle />
-            {/* Login Dropdown */}
+
+            {/* Language Selector */}
             <DropdownMenu>
               <DropdownMenuTrigger asChild>
                 <Button
                   variant="outline"
-                  className="bg-white/10 border-gray-200 dark:border-white/20 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-white/100"
+                  className="bg-white/10 border-gray-200 dark:border-white/20 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-white/100 px-3"
                 >
-                  Login <ChevronDown className="ml-2 h-4 w-4" />
+                  <span className="mr-1">{selectedLanguage.flag}</span>
+                  <span className="hidden sm:inline">{selectedLanguage.code.toUpperCase()}</span>
+                  <ChevronDown className="ml-2 h-4 w-4" />
                 </Button>
               </DropdownMenuTrigger>
               <DropdownMenuContent className="bg-white dark:bg-slate-900 border-gray-200 dark:border-gray-800">
-                <DropdownMenuItem asChild>
-                  <Link href="/auth/login?role=client" className="text-gray-900 dark:text-white">
-                    Client Login
-                  </Link>
-                </DropdownMenuItem>
-                <DropdownMenuItem asChild>
-                  <Link href="/auth/login?role=professional" className="text-gray-900 dark:text-white">
-                    Professional Login
-                  </Link>
-                </DropdownMenuItem>
+                {languages.map((language) => (
+                  <DropdownMenuItem
+                    key={language.code}
+                    onClick={() => setSelectedLanguage(language)}
+                    className="text-gray-900 dark:text-white hover:bg-gray-100 dark:hover:bg-gray-800 cursor-pointer"
+                  >
+                    <span className="mr-2">{language.flag}</span>
+                    <span>{language.name}</span>
+                    {selectedLanguage.code === language.code && <span className="ml-auto text-sky-500">✓</span>}
+                  </DropdownMenuItem>
+                ))}
               </DropdownMenuContent>
             </DropdownMenu>
-            <Button className="bg-sky-700 text-white hover:bg-sky-600 dark:bg-sky-700 dark:text-white dark:hover:bg-sky-600">
-              <Link href="/auth/signup">Sign Up</Link>
+
+            {/* Login Button - opens modal directly */}
+            <Button
+              variant="outline"
+              onClick={() => setLoginModalOpen(true)}
+              className="bg-white/10 border-gray-200 dark:border-white/20 text-gray-900 dark:text-white hover:bg-gray-300 dark:hover:bg-white/100"
+            >
+              Login
+            </Button>
+
+            {/* Sign Up Button - opens signup modal */}
+            <Button
+              onClick={() => setSignupModalOpen(true)}
+              className="bg-sky-700 text-white hover:bg-sky-600 dark:bg-sky-700 dark:text-white dark:hover:bg-sky-600"
+            >
+              Sign Up
             </Button>
           </div>
         </nav>
       </header>
+
+      {/* Login Modal */}
+      <LoginModal isOpen={loginModalOpen} onClose={() => setLoginModalOpen(false)} userType="client" />
+
+      {/* Signup Modal */}
+      <SignupModal
+        isOpen={signupModalOpen}
+        onClose={() => setSignupModalOpen(false)}
+        onSwitchToLogin={handleSwitchToLogin}
+      />
     </>
   )
 }
